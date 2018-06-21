@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R mocha-trx-reporter --reporter-options output=testresult.trx"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
