@@ -1,15 +1,26 @@
 param(
-    $buildNumber = $null,
     [switch] $pushImage = $false,
-    $containerImageName = "pipelinesamplenodejs"
+    $buildNumber = $null,
+    $containerImageName = "pipelinesamplenodejs",
+    $awsAccessKeyOverride = $null,
+    $awsSecretAccessKeyOverride = $null
 )
 
-# exit if push images is requested but a build number has not been specified at the command line
-if ($pushImage -eq $true -And $buildNumber -eq $null) {
-    throw "Cannot push container image without a build number. Specify one at the command line."
+$cwd = resolve-path .
+$currentAccessKey = $env:AWS_ACCESS_KEY_ID
+$currentSecretAccessKey = $env:AWS_SECRET_ACCESS_KEY
+
+
+if ($pushImage -eq $true) {
+    # exit if push images is requested but a build number has not been specified at the command line
+    if ($buildNumber -eq $null) {
+        throw "Cannot push container image without a build number. Specify one at the command line."
+    }
+
+    if ($awsAccessKeyOverride -ne $null) { $env:AWS_ACCESS_KEY_ID = $awsAccessKeyOverride }
+    if ($awsSecretAccessKeyOverride -ne $null) { $env:AWS_SECRET_ACCESS_KEY = $awsSecretAccessKeyOverride }
 }
 
-$cwd = resolve-path .
 
 try {
     cd src
@@ -50,4 +61,6 @@ try {
 }
 finally {
     cd $cwd
+    $env:AWS_ACCESS_KEY_ID = $currentAccessKey
+    $env:AWS_SECRET_ACCESS_KEY = $currentSecretAccessKey
 }
