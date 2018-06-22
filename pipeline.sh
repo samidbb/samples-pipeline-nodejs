@@ -12,9 +12,7 @@ readonly IMAGE_NAME='pipelinesamplenodejs'
 readonly BUILD_NUMBER=${1:-"N/A"}
 
 info() {
-    NORMAL=$(tput sgr0)
-    GREEN=$(tput setaf 2)
-    echo "${GREEN}$@${NORMAL}"
+    echo $@
 }
 
 run_tests() {
