@@ -1,0 +1,27 @@
+queue:
+  name: API Enablement
+  demands: OS -equals Linux
+  condition: succeeded()
+name: $(Build.BuildId)
+
+steps:
+- bash: |
+   AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
+   AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
+   chmod +x ./pipeline.sh && ./pipeline.sh 
+  displayName: Pipeline Bash Script
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: testresult.trx
+    searchFolder: '$(System.DefaultWorkingDirectory)/src'
+  condition: succeededOrFailed()
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish Artifact: manifests"
+  inputs:
+    PathtoPublish: k8s
+    ArtifactName: manifests
+
