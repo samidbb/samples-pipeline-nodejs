@@ -2,7 +2,8 @@ name: $(Build.BuildId)
 queue:
   name: API Enablement
   demands: OS -equals Linux
-
+trigger:
+- master
 steps:
 - bash: |
    AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
