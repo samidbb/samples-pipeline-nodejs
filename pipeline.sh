@@ -11,33 +11,29 @@ readonly REGION=${AWS_DEFAULT_REGION:-"eu-central-1"}
 readonly IMAGE_NAME='pipelinesamplenodejs'
 readonly BUILD_NUMBER=${1:-"N/A"}
 
-info() {
-    echo $@
-}
-
 run_tests() {
-    info "Running tests .."
+    echo "Running tests .."
     npm install
     npm run test -- -R mocha-trx-reporter --reporter-options output=testresult.trx
 }
 
 build_container_image() {
-    info "Building container image .."
+    echo "Building container image .."
     
     docker build -t ${IMAGE_NAME} .
 }
 
 push_container_image() {
-    info "Login to docker..."
+    echo "Login to docker..."
     $(aws ecr get-login --no-include-email)
 
     account_id=$(aws sts get-caller-identity --output text --query 'Account')
     image_name="${account_id}.dkr.ecr.${REGION}.amazonaws.com/dfds/${IMAGE_NAME}:${BUILD_NUMBER}"
 
-    info "Tagging container image..."
+    echo "Tagging container image..."
     docker tag ${IMAGE_NAME}:latest ${image_name}
 
-    info "Pushing container image to ECR..."
+    echo "Pushing container image to ECR..."
     docker push ${image_name}
 }
 
