@@ -1,8 +1,7 @@
+name: $(Build.BuildId)
 queue:
   name: API Enablement
   demands: OS -equals Linux
-  condition: succeeded()
-name: $(Build.BuildId)
 
 steps:
 - bash: |
