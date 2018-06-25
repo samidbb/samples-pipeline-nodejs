@@ -12,6 +12,14 @@ steps:
    ./pipeline.sh $(Build.BuildId)
   displayName: Pipeline Bash Script
 
+- powershell: |
+   write-host lala
+   write-host lala
+   write-host lala
+
+  displayName: Pipeline PowerShell Script
+  enabled: false
+
 - task: PublishTestResults@2
   displayName: Publish Test Results
   inputs:
