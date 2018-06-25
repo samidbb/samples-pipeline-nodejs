@@ -6,9 +6,10 @@ trigger:
 - master
 steps:
 - bash: |
-   AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) \
-   AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) \
-   chmod +x ./pipeline.sh && ./pipeline.sh $(Build.BuildId)
+   export AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID)
+   export AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
+   chmod +x ./pipeline.sh
+   ./pipeline.sh $(Build.BuildId)
   displayName: Pipeline Bash Script
 
 - task: PublishTestResults@2
