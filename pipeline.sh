@@ -8,7 +8,7 @@ set -eu -o pipefail
 
 # build parameters
 readonly REGION=${AWS_DEFAULT_REGION:-"eu-central-1"}
-readonly IMAGE_NAME='pipelinesamplenodejs'
+readonly IMAGE_NAME='samples-pipeline-nodejs'
 readonly BUILD_NUMBER=${1:-"N/A"}
 
 run_tests() {
@@ -28,7 +28,7 @@ push_container_image() {
     $(aws ecr get-login --no-include-email)
 
     account_id=$(aws sts get-caller-identity --output text --query 'Account')
-    image_name="${account_id}.dkr.ecr.${REGION}.amazonaws.com/dfds/${IMAGE_NAME}:${BUILD_NUMBER}"
+    image_name="${account_id}.dkr.ecr.${REGION}.amazonaws.com/ded/${IMAGE_NAME}:${BUILD_NUMBER}"
 
     echo "Tagging container image..."
     docker tag ${IMAGE_NAME}:latest ${image_name}

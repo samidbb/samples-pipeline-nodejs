@@ -1,7 +1,7 @@
 param(
     [switch] $pushImage = $false,
     $buildNumber = $null,
-    $containerImageName = "pipelinesamplenodejs",
+    $containerImageName = "samples-pipeline-nodejs",
     $awsAccessKeyOverride = $null,
     $awsSecretAccessKeyOverride = $null
 )
@@ -51,11 +51,11 @@ try {
         $awsRegion = $env:AWS_DEFAULT_REGION
     
         write-host "Tagging container image..." -foregroundcolor green
-        docker tag "${containerImageName}:latest" "${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/dfds/${containerImageName}:${buildNumber}"
+        docker tag "${containerImageName}:latest" "${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/ded/${containerImageName}:${buildNumber}"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     
         write-host "Pushing container image to ECR..." -foregroundcolor green
-        docker push "${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/dfds/${containerImageName}:${buildNumber}"
+        docker push "${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/ded/${containerImageName}:${buildNumber}"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     }
 }
