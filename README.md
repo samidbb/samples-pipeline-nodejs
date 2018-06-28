@@ -95,7 +95,7 @@ $env:AWS_SECRET_ACCESS_KEY = "$(AWS_SECRET_ACCESS_KEY)"
 ./pipeline.ps1 -pushImage -buildNumber $(Build.BuildId)
 ```
 
-## `.vsts-ci.yml`
+## Declarative Build Definition (a.k.a. `.vsts-ci.yml`)
 
 > **IMPORTANT**: The naming and location of `.vsts-ci.yml` is fixed - otherwise the build will not have the required permission to build agents and other resources in VSTS.
 
