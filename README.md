@@ -48,6 +48,9 @@ PS> ./pipeline.ps1
 Run `docker images` afterwards to verify that the container image has been built.
 
 ### Build server usage (on VSTS)
+On VSTS a recommended execution could be:
+
 ````powershell
-PS> ./pipeline.ps1
+PS> ./pipeline.ps1 -pushImage -buildNumber $(Build.BuildId)
 ````
+The example above injects the VSTS build number into the pipeline script, so that it can be used to tagging the container image.
