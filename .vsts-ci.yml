@@ -1,6 +1,6 @@
 name: $(Build.BuildId)
 queue:
-  name: Hosted Linux Preview (Hosted Linux Preview)
+  name: Hosted Linux Preview
   demands: Agent.OS -equals linux
 trigger:
 - master
