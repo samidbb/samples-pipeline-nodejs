@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: container
-        image: 591879361107.dkr.ecr.eu-central-1.amazonaws.com/dfds/pipelinesamplenodejs:$(Build.BuildId)
+        image: 579478677147.dkr.ecr.eu-central-1.amazonaws.com/ded/samples-pipeline-nodejs:$(Build.BuildId)
         ports:
         - containerPort: 3000
           name: web
