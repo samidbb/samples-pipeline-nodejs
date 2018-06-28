@@ -1,7 +1,7 @@
 name: $(Build.BuildId)
 queue:
-  name: API Enablement
-  demands: OS -equals Linux
+  name: Hosted Linux Preview (Hosted Linux Preview)
+  demands: Agent.OS -equals linux
 trigger:
 - master
 steps:
@@ -10,13 +10,13 @@ steps:
    chmod +x ./pipeline.sh
    ./pipeline.sh $(Build.BuildId)
   displayName: Pipeline Bash Script
-  enabled: false
+  enabled: true
 
 - powershell: |
    $env:AWS_SECRET_ACCESS_KEY = "$(AWS_SECRET_ACCESS_KEY)"
    ./pipeline.ps1 -pushImage -buildNumber $(Build.BuildId)
   displayName: Pipeline PowerShell Script
-  enabled: true
+  enabled: false
 
 - task: PublishTestResults@2
   displayName: Publish Test Results
