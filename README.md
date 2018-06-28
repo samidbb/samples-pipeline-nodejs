@@ -4,11 +4,16 @@
 - declarative setup in VSTS
 
 # Prerequisites
-- aws cli (and python)
-- aws authentication (environment variables or config file)
+A couple of components are required to be installed before executing the script. Here is a list of them, with a small explenation:
+
+| Tool    | Comment |
+|---------|---------|
+| AWS CLI | A command line tool that the script heavily relies on for interacting with AWS ECR |
+| AWS access | The AWS CLI should be authenticated either by environment variables or a config file within you user folder. |
+
 
 # Usage
-...
+The following will show how to use both the linux shell script and the powershell core editions of the pipeline.
 
 ## Linux Shell Script
 
