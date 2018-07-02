@@ -12,6 +12,19 @@ if ($pushImage -eq $true -AND $buildNumber -eq $null) {
 $cwd = resolve-path .
 
 try {
+    if ( !(Get-Command "aws" -ErrorAction SilentlyContinue)) 
+    { 
+        Write-Host 'Installing AWS'
+        wget https://bootstrap.pypa.io/get-pip.py
+        python3 get-pip.py
+        pip -q install awscli --upgrade
+        aws --version
+    }
+    else
+    {
+        Write-Host "Yay, AWS already installed :-)"
+    }
+
     cd src
 
     write-host "NPM install..." -foregroundcolor green

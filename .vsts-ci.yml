@@ -12,13 +12,13 @@ steps:
    chmod +x ./pipeline.sh
    ./pipeline.sh $(Build.BuildId)
   displayName: Pipeline Bash Script
-  enabled: true
+  enabled: false
 
 - powershell: |
    $env:AWS_SECRET_ACCESS_KEY = "$(AWS_SECRET_ACCESS_KEY)"
    ./pipeline.ps1 -pushImage -buildNumber $(Build.BuildId)
   displayName: Pipeline PowerShell Script
-  enabled: false
+  enabled: true
 
 - task: PublishTestResults@2
   displayName: Publish Test Results
