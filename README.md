@@ -1,3 +1,5 @@
+# [DEPRECATED]
+
 # Introduction
 
 This is a simple example of a Node.JS applications build using scripts and a VSTS declarative build definition (`.vsts-ci.yml`).
